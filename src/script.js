@@ -7,7 +7,6 @@
 // if (!code) {
 //     redirectToAuthCodeFlow(clientId);
 // } else {
-//     // const accessToken = "AQAfoehhfOKSyTYLiNQGfqZUhuwDyWUku2IGPtyPgEcy1VOlPKQ2AD21z--GEz0kOl2vnrS7GhyjdwcMuqVGRR2rySKhPHl9SdTG7vm0A-n6qtZqmTqc0Pv0__KAOGu4zUdm5za5hWKT5KwsLloikgpACCEoN7q7NCov-CgsznJtU8BIBQk4CPIQ7QaUeQcs67dl0RcOxnvakL-szJDxnMpC7gJIHHuDLqNotJ8uC20WjwrD0AcDYd_KnsGrwDM9qV-jfNtJswnKaVRJAR9B0dEaXp1pplSJJg";
 //     const accessToken = await getAccessToken(clientId, code);
 
 //     const profile = await fetchProfile(accessToken);
@@ -35,6 +34,7 @@
 //     const { access_token } = await result.json();
 //     return access_token;
 // }
+
 
 // async function fetchProfile(token) {
 //     const result = await fetch("https://api.spotify.com/v1/me", {
@@ -99,7 +99,7 @@
 
 
 // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
-const token = 'BQD3AEhIaf-d41Hig-ABM-pH74Dqem71cUUOrNI9HCQesh2eh4-wmwMRHTdMEQaGnd4d7TPHjuzvWlOq0g-JLTl-_wr65yO_k5xS9X1fHgojbpTeNwY9dSkGSkJ0YFaBtBLMtMxIVR_eK36HunPusSS0emWH5O7UZQhdmAj7YV2F-wvV4e-3QDNQ5JYbd9VQ5Ompi_tWXqUPTBWBTPKbx8GUNU7VgkeirKXnAakjky9VQgDJouxEASnei5O07AaNHIJnHs4';
+const token = 'BQBn8tg7gYAPxNM8vqRy-SHCgd1XbfmPlS6VIWvipvMT5ZLRoj3IDv-Z0dsbVhk0Ee-bkhY77kub9vje60pmaoPYai0uU8iTlgIOIuEKPOeES9uzO9KuK0IG4l6a6pp4Rqx9NOUbGBN3UD9fW7HDZrIlWHMY6nKu8811lFca_Yen47xb433uHsZPWMidh8hRWFmbwWG8LZUrt5s2j_7JRe9kCiSI9NyU5voC28MDPio4hlT-X97mtm7huUJL5r-LNYGBkos';
 async function fetchWebApi(endpoint, method, body) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
@@ -114,31 +114,49 @@ async function fetchWebApi(endpoint, method, body) {
 async function getTopTracks(){
   // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
   return (await fetchWebApi(
-    'v1/me/top/tracks?time_range=short_term&limit=5', 'GET'
+    'v1/me/top/tracks?time_range=short_term&limit=10', 'GET'
   )).items;
 }
 
-async function getTopTracksClient(){
 const topTracks = await getTopTracks();
+console.log(
+  topTracks?.map(
+    ({name, artists}) =>
+      `${name} by ${artists.map(artist => artist.name).join(', ')}`
+  )
+);
+
+function populateUI() {
+  document.getElementById("displayName").innerText = topTracks[0].name
+  document.getElementById("id").innerText = topTracks[3].name;
+  document.getElementById("email").innerText = topTracks[1].name;
+  document.getElementById("uri").innerText = topTracks[2].name;
+  // document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
+  document.getElementById("url").innerText = profile.href;
+  // document.getElementById("url").setAttribute("href", profile.href);
 }
-// console.log(topTracks);
+
+populateUI();
 
   var idList = [];
   topTracks.forEach(track => {
     idList.push(track.id);
    });
 
-  async function getRecommendations(){
+   async function getRecommendations(){
     // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-recommendations
     return (await fetchWebApi(
       `v1/recommendations?limit=5&seed_tracks=${idList.join(',')}`, 'GET'
     )).tracks;
   }
-
-
   
   const recommendedTracks = await getRecommendations();
-  console.log( recommendedTracks);
+  // console.log(
+  //   recommendedTracks.map(
+  //     ({name, artists}) =>
+  //       `${name} by ${artists.map(artist => artist.name).join(', ')}`
+  //   )
+  // );
 
   var recommended = [];
   recommendedTracks.forEach(track => {
@@ -170,8 +188,6 @@ async function createPlaylist(tracksUri){
   return playlist;
 }
 
-async function createPlaylistNew() {
-    const createdPlaylist = await createPlaylist(formattedList);
-    console.log(createdPlaylist.name, createdPlaylist.id);
+  // const createdPlaylist = await createPlaylist(formattedList);
+  // console.log(createdPlaylist.name, createdPlaylist.id);
 
-}
