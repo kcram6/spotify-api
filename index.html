@@ -4,29 +4,51 @@
         <meta charset="utf-8">
         <title>My Spotify Profile</title>
         <script src="src/script.js" type="module"></script>
+        <link href="style.css" rel="stylesheet" />
     </head>
     <body>
-      <h1>Display your Spotify profile data</h1>
+      <section>
+        <div class="wrapper">
+          <div class="flex-between">
+            <img class="logo" src="/img/logo.png">
+
+            <nav class="menu">
+              <ul>
+                <a href="#"><li>Top Songs</li></a>
+                <a href="#"><li>Top Artists</li></a>
+                <a href="#"><li>Top Genres</li></a>
+              </ul>
+            </nav>
+
+            <div>
+              <!-- <img src=""> -->
+              <button class="secondary-btn">Log Out</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       <section id="profile">
-      <h2>Logged in as <span id="displayName"></span></h2>
-      <span id="avatar"></span>
-      <ul>
-          <li>User ID: <span id="id"></span></li>
-          <li>Email: <span id="email"></span></li>
-          <li>Spotify URI: <a id="uri" href="#"></a></li>
-          <li>Link: <a id="url" href="#"></a></li>
-          <li>Profile Image: <span id="imgUrl"></span></li>
-      </ul>
+        <div class="wrapper">
+          <h2>Logged in as <span id="displayName"></span></h2>
+          <span id="avatar"></span>
+          <ul>
+              <li>User ID: <span id="id"></span></li>
+              <li>Email: <span id="email"></span></li>
+              <li>Spotify URI: <a id="uri" href="#"></a></li>
+              <li>Link: <a id="url" href="#"></a></li>
+              <li>Profile Image: <span id="imgUrl"></span></li>
+          </ul>
+        </div>
       </section>
 
       <section>
-
-        <button>Get Recommended</button>
-        <button onclick="getTopTracksClient()">Get Top Tracks</button>
-
-        <button onclick="createPlaylistNew()">Create new playlist</button>
-
+        <div class="wrapper">
+          <button>Get Recommended</button>
+          <button onclick="getTopTracksClient()">Get Top Tracks</button>
+          <button onclick="createPlaylistNew()">Create new playlist</button>
+        </div>
       </section>
       
     </body>
