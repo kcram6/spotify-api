@@ -2,7 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>My Spotify Profile</title>
+        <title>My Spotify Recommendations</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
         <script src="src/script.js" type="module"></script>
         <link href="style.css" rel="stylesheet" />
     </head>
@@ -28,22 +30,94 @@
         </div>
       </section>
 
-
-      <section id="profile">
+      <section>
         <div class="wrapper">
-          <h2>Logged in as <span id="displayName"></span></h2>
-          <span id="avatar"></span>
-          <ul>
-              <li>User ID: <span id="id"></span></li>
-              <li>Email: <span id="email"></span></li>
-              <li>Spotify URI: <a id="uri" href="#"></a></li>
-              <li>Link: <a id="url" href="#"></a></li>
-              <li>Profile Image: <span id="imgUrl"></span></li>
-          </ul>
+          <div class="grid-3">
+            <div class="child">
+              <span id="avatar"></span>
+              <ul>
+                  <li>User ID: <span id="id"></span></li>
+                  <li>Email: <span id="email"></span></li>
+                  <li>Spotify URI: <a id="uri" href="#"></a></li>
+                  <li>Link: <a id="url" href="#"></a></li>
+                  <li>Profile Image: <span id="imgUrl"></span></li>
+              </ul>
+            </div>
+            <div class="child">
+              <h3>Your Top Songs</h3>
+
+              <div class="card" id="one">
+                <div>
+                  <p class="num"><span class="num-container">1</span></p>
+                </div>
+                <div class="card-title">
+                  <img src="img/logo.png" />
+                  <div>
+                    <h4>Song Title</h4>
+                    <p>Artist</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" id="two">
+                <div>
+                  <p class="num"><span class="num-container">2</span></p>
+                </div>
+                <div class="card-title">
+                  <img src="img/logo.png" />
+                  <div>
+                    <h4>Song Title</h4>
+                    <p>Artist</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" id="three">
+                <div>
+                  <p class="num"><span class="num-container">3</span></p>
+                </div>
+                <div class="card-title">
+                  <img src="img/logo.png" />
+                  <div>
+                    <h4>Song Title</h4>
+                    <p>Artist</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" id="four">
+                <div>
+                  <p class="num"><span class="num-container">4</span></p>
+                </div>
+                <div class="card-title">
+                  <img src="img/logo.png" />
+                  <div>
+                    <h4>Song Title</h4>
+                    <p>Artist</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" id="five">
+                <div>
+                  <p class="num"><span class="num-container">5</span></p>
+                </div>
+                <div class="card-title">
+                  <img src="img/logo.png" />
+                  <div>
+                    <h4>Song Title</h4>
+                    <p>Artist</p>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="child">1</div>
+
+          </div>
         </div>
       </section>
-
-      
       
     </body>
 </html>
