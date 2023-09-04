@@ -99,7 +99,7 @@
 
 
 // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
-const token = 'BQBn8tg7gYAPxNM8vqRy-SHCgd1XbfmPlS6VIWvipvMT5ZLRoj3IDv-Z0dsbVhk0Ee-bkhY77kub9vje60pmaoPYai0uU8iTlgIOIuEKPOeES9uzO9KuK0IG4l6a6pp4Rqx9NOUbGBN3UD9fW7HDZrIlWHMY6nKu8811lFca_Yen47xb433uHsZPWMidh8hRWFmbwWG8LZUrt5s2j_7JRe9kCiSI9NyU5voC28MDPio4hlT-X97mtm7huUJL5r-LNYGBkos';
+const token = 'BQAzi-9ZV110P6U_dR7URl7Jj8eeL7krY4fztOnMB1SMCmAi5q9GmUjmnDikXgdeDB278-PrJV-qZqySGJfnk33Ylz38DLFwpBclgyK0Eh9PnCfGmbWsGQeax8nNpFhcgfsoAW4pgrkHDeg6z4XBxUg1xHV7ftdY46GTagQao5pFf5rlbK1LQKOnr3TuR4aaOYzsS8yfU_vSNTvIy96M4ZDtcdmFHUw-tDpHyeX-CqwSliMBY8IARoVC12BstojyNHp6xiM';
 async function fetchWebApi(endpoint, method, body) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
@@ -125,15 +125,67 @@ console.log(
       `${name} by ${artists.map(artist => artist.name).join(', ')}`
   )
 );
+console.log(topTracks);
 
 function populateUI() {
-  document.getElementById("displayName").innerText = topTracks[0].name
-  document.getElementById("id").innerText = topTracks[3].name;
-  document.getElementById("email").innerText = topTracks[1].name;
-  document.getElementById("uri").innerText = topTracks[2].name;
-  // document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
-  document.getElementById("url").innerText = profile.href;
-  // document.getElementById("url").setAttribute("href", profile.href);
+
+  $("#one h4").text(topTracks[0]['name']);
+  $("#one .card-title p").text(topTracks[0]['artists'][0]['name']);
+  $("#one .card-title img").attr("src", topTracks[0]['album']['images'][2]['url']);
+  $("#one a").attr("href", topTracks[0]['external_urls']['spotify']);
+
+
+  $("#two h4").text(topTracks[1]['name']);
+  $("#two .card-title p").text(topTracks[1]['artists'][0]['name']);
+  $("#two .card-title img").attr("src", topTracks[1]['album']['images'][2]['url']);
+  $("#two a").attr("href", topTracks[1]['external_urls']['spotify']);
+
+
+  $("#three h4").text(topTracks[2]['name']);
+  $("#three .card-title p").text(topTracks[2]['artists'][0]['name']);
+  $("#three .card-title img").attr("src", topTracks[2]['album']['images'][2]['url']);
+  $("#three a").attr("href", topTracks[2]['external_urls']['spotify']);
+
+
+  $("#four h4").text(topTracks[3]['name']);
+  $("#four .card-title p").text(topTracks[3]['artists'][0]['name']);
+  $("#four .card-title img").attr("src", topTracks[3]['album']['images'][2]['url']);
+  $("#four a").attr("href", topTracks[3]['external_urls']['spotify']);
+
+
+  $("#five h4").text(topTracks[4]['name']);
+  $("#five .card-title p").text(topTracks[4]['artists'][0]['name']);
+  $("#five .card-title img").attr("src", topTracks[4]['album']['images'][2]['url']);
+  $("#five a").attr("href", topTracks[4]['external_urls']['spotify']);
+
+
+
+  $("#six h4").text(topTracks[5]['name']);
+  $("#six .card-title p").text(topTracks[5]['artists'][0]['name']);
+  $("#six .card-title img").attr("src", topTracks[5]['album']['images'][2]['url']);
+  $("#six a").attr("href", topTracks[5]['external_urls']['spotify']);
+
+  $("#seven h4").text(topTracks[6]['name']);
+  $("#seven .card-title p").text(topTracks[6]['artists'][0]['name']);
+  $("#seven .card-title img").attr("src", topTracks[6]['album']['images'][2]['url']);
+  $("#seven a").attr("href", topTracks[6]['external_urls']['spotify']);
+
+  $("#eight h4").text(topTracks[7]['name']);
+  $("#eight .card-title p").text(topTracks[7]['artists'][0]['name']);
+  $("#eight .card-title img").attr("src", topTracks[7]['album']['images'][2]['url']);
+  $("#eight a").attr("href", topTracks[7]['external_urls']['spotify']);
+
+  $("#nine h4").text(topTracks[8]['name']);
+  $("#nine .card-title p").text(topTracks[8]['artists'][0]['name']);
+  $("#nine .card-title img").attr("src", topTracks[8]['album']['images'][2]['url']);
+  $("#nine a").attr("href", topTracks[8]['external_urls']['spotify']);
+
+  $("#ten h4").text(topTracks[9]['name']);
+  $("#ten .card-title p").text(topTracks[9]['artists'][0]['name']);
+  $("#ten .card-title img").attr("src", topTracks[9]['album']['images'][2]['url']);
+  $("#ten a").attr("href", topTracks[9]['external_urls']['spotify']);
+
+
 }
 
 populateUI();
