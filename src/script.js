@@ -103,7 +103,7 @@
 
 // BQDj8UMQF-lY1UZj4j9WAMSTNsajPtraSV1mcNw-WWz0lEI3iS8ODs6LRrZF9DhJroLDk36ittRdZRA95ZWgVtKEPdH5mDGCy75yqSAyKyJ-L5ifGoA
 // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
-const token = 'BQAoV8mCswysTNObjC4X4LmlvPFiNJI9Bf_445sOvTO1xA3KP9YQA2JDM0iFLjPfYP0k-6rRT5sXaxO3CMyJvgXTJPOfntJxI2miXvXs4T5Vk1fH8OPybSNL3QQKQW0jn0NkoY3QpDQNQwGa6yjChiRGRGXQcIZ_Fh3acZEKFbgSUfU_RoFe3--2KZ38RcK-t7BiU93xi3UwWdBEiXyuAcmwE60IZpiJtWAYDZ4554Sd49sCGCkd0a1YPxaswPHVVX5JwLQ';
+const token = 'BQAn-Vo9vKYy7675npCe1KkUmQzipdViN_ztDNLcusVfZEp2piH59YCCYYytqwyDpTBEu9zSe5Qwb-kG_HiK3xYxrFz86-pkOYQWDvNPG5CkoRCk6wG46Tj_gl_7a4jAxS1smpydBW9pP4h7M1TiSjyYKnP-yqiebB1ZqAwWQtoMsn4tNDc4dCMezgj_hGPClBYBlbSfWgHd60qjK4TaET7OimEesmfvRFNpRwghi-TD2XLq-AhVhpRoMLIKsu0I8yZ50Ak';
 async function fetchWebApi(endpoint, method, body) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
@@ -133,7 +133,7 @@ console.log(
 
 
 
-function populateUI() {
+async function populateUI() {
 
   $("#one h4").text(topTracks[0]['name']);
   $("#one .card-title p").text(topTracks[0]['artists'][0]['name']);
@@ -202,6 +202,11 @@ function populateUI() {
     $(`${cardId} a`).attr("href", track.external_urls.spotify);
   }
 
+  const user = await getUser();
+  console.log(user);
+
+  console.log(user['display_name']);
+
 }
 
 
@@ -215,7 +220,7 @@ function populateUI() {
   });
 
 
-   async function getRecommendations(){
+  async function getRecommendations(){
     // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-recommendations
     return (await fetchWebApi(
       `v1/recommendations?limit=50&seed_tracks=${idList.join(',')}`, 'GET'
@@ -230,6 +235,11 @@ function populateUI() {
     )
   );
 
+  async function getUser(){
+    return (await fetchWebApi(
+      `v1/me`, 'GET'
+    ));
+  }
 
 
   var recommended = [];
@@ -263,8 +273,7 @@ async function createPlaylist(tracksUri){
   return playlist;
 }
 
-// async function makeRec() {
-
-  const createdPlaylist = await createPlaylist(formattedList);
+export function makeRec() {
+  const createdPlaylist = createPlaylist(formattedList);
   console.log(createdPlaylist.name, createdPlaylist.id);
-// }
+}

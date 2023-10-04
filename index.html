@@ -217,73 +217,70 @@
       <button class="secondary-btn generatePlaylist" id="runButton">Like it? Create a Recommendation Playlist</button>
       
 
-      <script src="src/script.js" type="module"></script>
-
       <script>
         const container = document.getElementById("container");
 
 
 
-for (let i = 1; i <= 50; i++) {
-  // Create a unique ID for each div by appending the value of 'i'.
-  const uniqueId = `rec-${i}`;
+        for (let i = 1; i <= 50; i++) {
+          const uniqueId = `rec-${i}`;
 
-  // Create the <a> element with a unique href.
-  const link = document.createElement("a");
-  link.href = `https://example.com/${uniqueId}`;
-  link.target = "_blank";
-  link.className = "rec";
+          const link = document.createElement("a");
+          link.href = `https://example.com/${uniqueId}`;
+          link.target = "_blank";
+          link.className = "rec";
 
-  // Create the outer <div> with a unique ID.
-  const outerDiv = document.createElement("div");
-  outerDiv.className = "card";
-  outerDiv.id = uniqueId;
+          const outerDiv = document.createElement("div");
+          outerDiv.className = "card";
+          outerDiv.id = uniqueId;
 
-  // Create the content for the <div> including the number.
-  const numDiv = document.createElement("div");
-  numDiv.className = "num";
-  const numContainer = document.createElement("span");
-  numContainer.className = "num-container";
-  numContainer.textContent = i;
-  numDiv.appendChild(numContainer);
+          const numDiv = document.createElement("div");
+          numDiv.className = "num";
+          const numContainer = document.createElement("span");
+          numContainer.className = "num-container";
+          numContainer.textContent = i;
+          numDiv.appendChild(numContainer);
 
-  // Create the card title content.
-  const cardTitleDiv = document.createElement("div");
-  cardTitleDiv.className = "card-title";
-  const logoImg = document.createElement("img");
-  logoImg.src = "img/logo.png";
+          const cardTitleDiv = document.createElement("div");
+          cardTitleDiv.className = "card-title";
+          const logoImg = document.createElement("img");
+          logoImg.src = "img/logo.png";
 
-  // Create a <div> to contain the <h4> and <p>.
-  const textDiv = document.createElement("div");
+          const textDiv = document.createElement("div");
 
-  const h4 = document.createElement("h4");
-  h4.textContent = "Song Title";
+          const h4 = document.createElement("h4");
+          h4.textContent = "Song Title";
 
-  const p = document.createElement("p");
-  p.textContent = "Artist";
+          const p = document.createElement("p");
+          p.textContent = "Artist";
 
-  // Append the <h4> and <p> to the text <div>.
-  textDiv.appendChild(h4);
-  textDiv.appendChild(p);
+          textDiv.appendChild(h4);
+          textDiv.appendChild(p);
 
-  // Append everything together.
-  cardTitleDiv.appendChild(logoImg);
-  cardTitleDiv.appendChild(textDiv);
-  outerDiv.appendChild(numDiv);
-  outerDiv.appendChild(cardTitleDiv);
-  link.appendChild(outerDiv);
-  container.appendChild(link);
-}
+          cardTitleDiv.appendChild(logoImg);
+          cardTitleDiv.appendChild(textDiv);
+          outerDiv.appendChild(numDiv);
+          outerDiv.appendChild(cardTitleDiv);
+          link.appendChild(outerDiv);
+          container.appendChild(link);
+        }
 
       </script>
 
 
+      <script type="module" src="src/script.js"></script>
       <script>
         const runButton = document.getElementById("runButton");
-        // Attach an event listener to the button
         runButton.addEventListener("click", function() {
-          makeRec(); // Call the makeRec function when the button is clicked
+          import('./src/script.js')
+            .then(module => {
+              module.makeRec();
+            })
+            .catch(error => {
+              console.error('Error importing script.js:', error);
+            });
         });
       </script>
+
     </body>
 </html>
