@@ -9,3 +9,6 @@
 3. Run `npm install`
 4. Run `npm run dev`
 5. Visit your localhost
+
+
+This API requires you create a developer account on https://developer.spotify.com/
