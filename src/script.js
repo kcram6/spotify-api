@@ -1,7 +1,5 @@
-// const clientId = "8119c4e158224814bae3c75a5bbd5972"; // Replace with your client ID
 // const params = new URLSearchParams(window.location.search);
 // const code = params.get("code");
-// // let token = "AQAfoehhfOKSyTYLiNQGfqZUhuwDyWUku2IGPtyPgEcy1VOlPKQ2AD21z--GEz0kOl2vnrS7GhyjdwcMuqVGRR2rySKhPHl9SdTG7vm0A-n6qtZqmTqc0Pv0__KAOGu4zUdm5za5hWKT5KwsLloikgpACCEoN7q7NCov-CgsznJtU8BIBQk4CPIQ7QaUeQcs67dl0RcOxnvakL-szJDxnMpC7gJIHHuDLqNotJ8uC20WjwrD0AcDYd_KnsGrwDM9qV-jfNtJswnKaVRJAR9B0dEaXp1pplSJJg";
 
 
 // if (!code) {
@@ -96,13 +94,6 @@
 //         .replace(/=+$/, '');
 // }
 
-// curl -X POST "https://accounts.spotify.com/api/token" \
-//      -H "Content-Type: application/x-www-form-urlencoded" \
-//      -d "grant_type=client_credentials&client_id=8119c4e158224814bae3c75a5bbd5972&client_secret=ad0551eecea946ca815adee46af90f38"
-
-
-// BQDj8UMQF-lY1UZj4j9WAMSTNsajPtraSV1mcNw-WWz0lEI3iS8ODs6LRrZF9DhJroLDk36ittRdZRA95ZWgVtKEPdH5mDGCy75yqSAyKyJ-L5ifGoA
-// Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
 const token = 'BQAn-Vo9vKYy7675npCe1KkUmQzipdViN_ztDNLcusVfZEp2piH59YCCYYytqwyDpTBEu9zSe5Qwb-kG_HiK3xYxrFz86-pkOYQWDvNPG5CkoRCk6wG46Tj_gl_7a4jAxS1smpydBW9pP4h7M1TiSjyYKnP-yqiebB1ZqAwWQtoMsn4tNDc4dCMezgj_hGPClBYBlbSfWgHd60qjK4TaET7OimEesmfvRFNpRwghi-TD2XLq-AhVhpRoMLIKsu0I8yZ50Ak';
 async function fetchWebApi(endpoint, method, body) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
