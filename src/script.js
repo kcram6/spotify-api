@@ -96,10 +96,14 @@
 //         .replace(/=+$/, '');
 // }
 
+// curl -X POST "https://accounts.spotify.com/api/token" \
+//      -H "Content-Type: application/x-www-form-urlencoded" \
+//      -d "grant_type=client_credentials&client_id=8119c4e158224814bae3c75a5bbd5972&client_secret=ad0551eecea946ca815adee46af90f38"
 
 
+// BQDj8UMQF-lY1UZj4j9WAMSTNsajPtraSV1mcNw-WWz0lEI3iS8ODs6LRrZF9DhJroLDk36ittRdZRA95ZWgVtKEPdH5mDGCy75yqSAyKyJ-L5ifGoA
 // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
-const token = 'BQAzi-9ZV110P6U_dR7URl7Jj8eeL7krY4fztOnMB1SMCmAi5q9GmUjmnDikXgdeDB278-PrJV-qZqySGJfnk33Ylz38DLFwpBclgyK0Eh9PnCfGmbWsGQeax8nNpFhcgfsoAW4pgrkHDeg6z4XBxUg1xHV7ftdY46GTagQao5pFf5rlbK1LQKOnr3TuR4aaOYzsS8yfU_vSNTvIy96M4ZDtcdmFHUw-tDpHyeX-CqwSliMBY8IARoVC12BstojyNHp6xiM';
+const token = 'BQAoV8mCswysTNObjC4X4LmlvPFiNJI9Bf_445sOvTO1xA3KP9YQA2JDM0iFLjPfYP0k-6rRT5sXaxO3CMyJvgXTJPOfntJxI2miXvXs4T5Vk1fH8OPybSNL3QQKQW0jn0NkoY3QpDQNQwGa6yjChiRGRGXQcIZ_Fh3acZEKFbgSUfU_RoFe3--2KZ38RcK-t7BiU93xi3UwWdBEiXyuAcmwE60IZpiJtWAYDZ4554Sd49sCGCkd0a1YPxaswPHVVX5JwLQ';
 async function fetchWebApi(endpoint, method, body) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
@@ -125,7 +129,9 @@ console.log(
       `${name} by ${artists.map(artist => artist.name).join(', ')}`
   )
 );
-console.log(topTracks);
+
+
+
 
 function populateUI() {
 
@@ -186,29 +192,45 @@ function populateUI() {
   $("#ten a").attr("href", topTracks[9]['external_urls']['spotify']);
 
 
+  for (let i = 0; i < 50; i++) {
+    const track = recommendedTracks[i]; // Assuming topTracks is an array of track objects
+  
+    const cardId = `#rec-${i + 1}`;
+    $(`${cardId} h4`).text(track.name);
+    $(`${cardId} .card-title p`).text(track.artists[0].name);
+    $(`${cardId} .card-title img`).attr("src", track.album.images[2].url);
+    $(`${cardId} a`).attr("href", track.external_urls.spotify);
+  }
+
 }
 
-populateUI();
 
   var idList = [];
+  var count = 0;
   topTracks.forEach(track => {
-    idList.push(track.id);
-   });
+    if (count < 5) {
+      idList.push(track.id);
+      count++;
+    }
+  });
+
 
    async function getRecommendations(){
     // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-recommendations
     return (await fetchWebApi(
-      `v1/recommendations?limit=5&seed_tracks=${idList.join(',')}`, 'GET'
+      `v1/recommendations?limit=50&seed_tracks=${idList.join(',')}`, 'GET'
     )).tracks;
   }
   
   const recommendedTracks = await getRecommendations();
-  // console.log(
-  //   recommendedTracks.map(
-  //     ({name, artists}) =>
-  //       `${name} by ${artists.map(artist => artist.name).join(', ')}`
-  //   )
-  // );
+  console.log(
+    recommendedTracks.map(
+      ({name, artists}) =>
+        `${name} by ${artists.map(artist => artist.name).join(', ')}`
+    )
+  );
+
+
 
   var recommended = [];
   recommendedTracks.forEach(track => {
@@ -221,6 +243,7 @@ populateUI();
     formattedList.push("spotify:track:" + id);
    });
 
+   populateUI();
 
 async function createPlaylist(tracksUri){
   const { id: user_id } = await fetchWebApi('v1/me', 'GET')
@@ -228,7 +251,7 @@ async function createPlaylist(tracksUri){
   const playlist = await fetchWebApi(
     `v1/users/${user_id}/playlists`, 'POST', {
       "name": "My recommendation playlist",
-      "description": "Playlist created by the tutorial on developer.spotify.com",
+      "description": "custom api created playlist",
       "public": false
   })
 
