@@ -92,7 +92,24 @@ button:hover {
   filter: drop-shadow(0 0 2em #3bba9ccc);
 }
 
+.generatePlaylist {
+  border: 1px solid var(--primary-color);
+  color: white;
+  padding: 10px 30px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background-color: var(--primary-color);
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
 
+#container {
+  max-height: 1100px;
+  overflow-y: scroll;
+}
 /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

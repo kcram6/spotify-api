@@ -263,6 +263,8 @@ async function createPlaylist(tracksUri){
   return playlist;
 }
 
-  // const createdPlaylist = await createPlaylist(formattedList);
-  // console.log(createdPlaylist.name, createdPlaylist.id);
+// async function makeRec() {
 
+  const createdPlaylist = await createPlaylist(formattedList);
+  console.log(createdPlaylist.name, createdPlaylist.id);
+// }
