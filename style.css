@@ -110,6 +110,10 @@ button:hover {
   max-height: 1100px;
   overflow-y: scroll;
 }
+
+#container .card {
+  gap: 20px;
+}
 /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

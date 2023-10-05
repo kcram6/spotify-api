@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>My Spotify Recommendations</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+        <script src="src/script.js" type="module"></script>
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+      <section>
+        <div class="wrapper">
+          <div class="flex-between">
+            <img class="logo" src="/img/logo.png">
+
+            <nav class="menu">
+              <ul>
+                <a href="/"><li>Top Songs</li></a>
+                <a href="/artists.html"><li>Top Artists</li></a>
+                <a href="/genres.html"><li>Top Genres</li></a>
+              </ul>
+            </nav>
+
+            <div>
+              <!-- <img src=""> -->
+              <button class="secondary-btn">Log Out</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrapper">
+          <div class="grid-3">
+            <div class="child">
+              <img id="imgUrl" />
+                  <div>Name: <span id="name"></span></div>
+                  <div>User ID: <span id="id"></span></div>
+                  <div>Link: <a target="_blank" id="url" href="#">View Profile</a></div>
+            </div>
+
+            <div class="child">
+              <h3>Top Artists of All Time</h3>
+
+              <div id="container">
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      
+
+      
+
+
+      <script type="module" src="src/script.js"></script>
+      <script>
+        const container = document.getElementById("container");
+
+
+
+        for (let i = 1; i <= 20; i++) {
+          const uniqueId = `art-${i}`;
+
+          const link = document.createElement("a");
+          link.href = `https://example.com/${uniqueId}`;
+          link.target = "_blank";
+          link.className = "art";
+
+          const outerDiv = document.createElement("div");
+          outerDiv.className = "card";
+          outerDiv.id = uniqueId;
+
+          const numDiv = document.createElement("div");
+          numDiv.className = "num";
+          const numContainer = document.createElement("span");
+          numContainer.className = "num-container";
+          numContainer.textContent = i;
+          numDiv.appendChild(numContainer);
+
+          const cardTitleDiv = document.createElement("div");
+          cardTitleDiv.className = "card-title";
+          const logoImg = document.createElement("img");
+          logoImg.src = "img/logo.png";
+
+          const textDiv = document.createElement("div");
+
+          const h4 = document.createElement("h4");
+          h4.textContent = "Song Title";
+
+          const p = document.createElement("p");
+          p.textContent = "Artist";
+
+          textDiv.appendChild(h4);
+          textDiv.appendChild(p);
+
+          cardTitleDiv.appendChild(logoImg);
+          cardTitleDiv.appendChild(textDiv);
+          outerDiv.appendChild(numDiv);
+          outerDiv.appendChild(cardTitleDiv);
+          link.appendChild(outerDiv);
+          container.appendChild(link);
+        }
+
+      </script>
+    </body>
+</html>
