@@ -211,7 +211,7 @@ async function populateUI() {
   $("#imgUrl").attr("src", user['images'][0]['url']);
 
   // console.log(user);
-
+// Get related artists to top artist: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-related-artists
 }
 
 
