@@ -94,7 +94,7 @@
 //         .replace(/=+$/, '');
 // }
 
-const token = 'BQCLt7XopGSgCyoWdkXHybGLV0-KR7sPRfzGpIHEm-mUYf9A0j9IKcivSlmut3pD2SCZ-xpG-o16zYNBobxZkdCNCGDlGSPg3xOlx0EDiRn30HLBhkuyK2_PvqMuu21UaqWUSBUa4A2PhuAyA7mlq4Cx8jnIHNgocwFJ5VB8ICuQPTPxMiwVP_nqNPu65aJCZwtRuSwerjoQjA-BsIBy1vp9B22-X5e4yPMN-Nb4G1R-JKKUXm4zLn-c74kzL7wkl8zTX6c';
+const token = 'BQCIgS_CdiH1-3xiY0HUaza6hYQB7F1MxdPMAi1nhTZMLcx-3jPWFN58_QY6QINQUR1cYusrRgESQZLW9WM3jZ8NamhV21T-ybOTSpH2JkTCXVMLOMvc0b0o1zEv8jisLaEIKhSEFPxJwh5C-5nCfyEwKeitSp-WVuIfATIk4WWyveeEWhHCBZ9SiCeqaMEHfPjVz_rGUl05MSLLy9fKrhN6q36_cP7TualCtrqcwJnFIeiHYXL25xUxWJPoaE3TxOrCW3A';
 async function fetchWebApi(endpoint, method, body) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
@@ -194,9 +194,28 @@ async function populateUI() {
   }
 
   for (let i = 0; i < 20; i++) {
-    const artist = topArtists['items'][i]; // Assuming topTracks is an array of track objects
-  
+    const artist = topArtists['items'][i]; 
     const cardId = `#art-${i + 1}`;
+    $(`${cardId} h4`).text(artist.name);
+    $(`${cardId} .card-title p`).text(artist.genres);
+    $(`${cardId} .card-title img`).attr("src", artist.images[0].url);
+    $(`${cardId} a`).attr("href", artist.external_urls);
+  }
+
+  for (let i = 0; i < 20; i++) {
+    const artist = topArtistsRecent['items'][i]; 
+  
+    const cardId = `#artnew-${i + 1}`;
+    $(`${cardId} h4`).text(artist.name);
+    $(`${cardId} .card-title p`).text(artist.genres);
+    $(`${cardId} .card-title img`).attr("src", artist.images[0].url);
+    $(`${cardId} a`).attr("href", artist.external_urls);
+  }
+
+  for (let i = 0; i < 20; i++) {
+    const artist = relatedArtists['artists'][i]; 
+  
+    const cardId = `#artrec-${i + 1}`;
     $(`${cardId} h4`).text(artist.name);
     $(`${cardId} .card-title p`).text(artist.genres);
     $(`${cardId} .card-title img`).attr("src", artist.images[0].url);
@@ -211,7 +230,6 @@ async function populateUI() {
   $("#imgUrl").attr("src", user['images'][0]['url']);
 
   // console.log(user);
-// Get related artists to top artist: https://developer.spotify.com/documentation/web-api/reference/get-an-artists-related-artists
 }
 
 
@@ -249,27 +267,43 @@ async function populateUI() {
   var recommended = [];
   recommendedTracks.forEach(track => {
     recommended.push(track.id);
-   });
+  });
 
 
   var formattedList = [];
   recommended.forEach(id => {
     formattedList.push("spotify:track:" + id);
-   });
+  });
 
 
 
-   async function getTopArtists(){
+  async function getTopArtistsAllTime(){
     return (await fetchWebApi(
       `v1/me/top/artists?limit=20&time_range=long_term`, 'GET'
     ));
   }
   
-  const topArtists = await getTopArtists();
-  console.log(
-    topArtists
-  );
+  const topArtists = await getTopArtistsAllTime();
 
+
+  async function getTopArtistsRecent(){
+    return (await fetchWebApi(
+      `v1/me/top/artists?limit=20&time_range=short_term`, 'GET'
+    ));
+  } 
+
+  const topArtistsRecent = await getTopArtistsRecent();
+
+  const artistRef = topArtistsRecent.items[0].id;
+  
+  
+  async function getArtistRecommendations(){
+    return (await fetchWebApi(
+      `v1/artists/${artistRef}/related-artists`, 'GET'
+    ))
+  }
+  const relatedArtists = await getArtistRecommendations();
+  console.log(relatedArtists);
 
 
 async function createPlaylist(tracksUri){

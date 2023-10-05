@@ -106,7 +106,7 @@ button:hover {
   right: 20px;
 }
 
-#container {
+#container, #container-artists-new, #container-artists-rec {
   max-height: 1100px;
   overflow-y: scroll;
 }
